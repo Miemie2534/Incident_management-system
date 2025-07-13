@@ -1,37 +1,49 @@
-<mat-card *ngFor="let data of Incident" class="user-detail-card">
+<mat-card *ngIf="incident" class="incident-detail-card">
   <mat-card-header>
-    <mat-card-title>รายละเอียดผู้ใช้งาน</mat-card-title>
-    <mat-card-subtitle>ID: {{ Incident }}</mat-card-subtitle>
+    <mat-card-title>รายละเอียดเหตุการณ์</mat-card-title>
   </mat-card-header>
 
+  <mat-divider></mat-divider>
+
   <mat-card-content>
-    <mat-list>
-      <mat-list-item>
-        <strong>ชื่อผู้แจ้ง:</strong> {{ data.report }}
-      </mat-list-item>
-      <mat-list-item>
-        <strong>สถานที่เกิดเหตุ:</strong> {{ data.location }}
-      </mat-list-item>
-      <mat-list-item>
-        <strong>รายละเอียด:</strong> {{ data.description }}
-      </mat-list-item>
-      <mat-list-item>
-        <strong>การแก้ไข:</strong> {{ data.solution }}
-      </mat-list-item>
-      <mat-list-item>
-        <strong>ประเภทเหตุการณ์:</strong> {{ data.type }}
-      </mat-list-item>
-      <mat-list-item>
-        <strong>ผู้บันทึกข้อมูล:</strong> {{ data.recorder }}
-      </mat-list-item>
-      <mat-list-item>
-        <strong>วันที่สร้างบัญชี:</strong> {{ data.reportDate| date:'medium' }}
-      </mat-list-item>
-    </mat-list>
+    <div class="detail-row" *ngFor="let item of [
+      { icon: 'description', label: 'รายงาน', value: incident.report },
+      { icon: 'place', label: 'สถานที่', value: incident.location },
+      { icon: 'category', label: 'ประเภท', value: incident.type },
+      { icon: 'info', label: 'คำอธิบาย', value: incident.description },
+      { icon: 'build', label: 'แนวทางแก้ไข', value: incident.solution },
+      { icon: 'person', label: 'ผู้บันทึก', value: incident.recorder }
+    ]">
+      <mat-icon color="primary" class="detail-icon">{{item.icon}}</mat-icon>
+      <div class="detail-label">{{item.label}}</div>
+      <div class="detail-value" [innerText]="item.value"></div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- image gallery part -->
+<div *ngIf="imagePreviewsOld.length > 0" class="image-gallery">
+  <h3>รูปภาพเหตุการณ์</h3>
+  <div class="image-list">
+    <mat-card
+      *ngFor="let imgSrc of imagePreviewsOld"
+      class="image-card"
+      appearance="outlined"
+      (click)="openImageDialog(imgSrc)"
+      style="cursor: pointer;"
+    >
+      <img mat-card-image [src]="imgSrc" alt="รูปเหตุการณ์" />
+    </mat-card>
+  </div>
+</div>
   </mat-card-content>
 
-  <mat-card-actions>
-    <button mat-raised-button color="primary">แก้ไข</button>
-    <button mat-raised-button color="warn">ลบ</button>
+   <mat-card-actions align="end" class="action-buttons flex-row gap-2">
+    <button mat-stroked-button color="primary" type="button" [routerLink]="['/incident-edit', incident.id]">
+      <mat-icon>edit</mat-icon> แก้ไข
+    </button>
+    <button mat-flat-button color="accent" (click)="onSave()">
+      <mat-icon>save</mat-icon> บันทึก
+    </button>
   </mat-card-actions>
 </mat-card>

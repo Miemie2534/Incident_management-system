@@ -1,0 +1,97 @@
+<div class="container mt-5">
+  <mat-card>
+    <mat-card-header class="bg-success text-white p-3">
+      <mat-card-title>
+        <mat-icon class="me-2">report_problem</mat-icon>
+        แบบฟอร์มการนำส่งผู้ป่วย
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="p-3">
+      <form [formGroup]="dataForm" (ngSubmit)="onSubmit()" class="patient-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>วันที่เกิดเหตุ</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="ReportDate" placeholder="เลือกวันที่เกิดเหตุ" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="dataForm.get('ReportDate')?.hasError('required')">
+            กรุณาเลือกวันที่เกิดเหตุ
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>รหัสพนักงาน</mat-label>
+          <input matInput formControlName="employeeId" placeholder="กรุณากรอกสถานที่เกิดเหตุ" required>
+          <mat-error *ngIf="dataForm.get('employeeId')?.hasError('required')">
+            กรุณากรอกรหัสพนักงาน
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>ชื่อ</mat-label>
+          <input matInput formControlName="firstName" placeholder="กรุณากรอกสถานที่เกิดเหตุ" required>
+          <mat-error *ngIf="dataForm.get('firstName')?.hasError('required')">
+            กรุณากรอกชื่อพนักงาน
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>นามสกุล</mat-label>
+          <input matInput formControlName="lastName" placeholder="กรุณากรอกสถานที่เกิดเหตุ" required>
+          <mat-error *ngIf="dataForm.get('lastName')?.hasError('required')">
+            กรุณากรอกนามสกุลพนักงาน
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>แผนก / ส่วนงาน</mat-label>
+          <input matInput formControlName="Department" placeholder="กรุณากรอกสถานที่เกิดเหตุ" required>
+          <mat-error *ngIf="dataForm.get('Department')?.hasError('required')">
+            กรุณากรอกแผนกหรือส่วนงาน
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>อาการ</mat-label>
+          <textarea matInput formControlName="Sickness" placeholder="กรุณากรอกรายละเอียด" rows="3" required></textarea>
+          <mat-error *ngIf="dataForm.get('Sickness')?.hasError('required')">
+            กรุณากรอกรายละเอียด
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>สถานที่นำส่ง</mat-label>
+          <input matInput formControlName="Hospital" placeholder="กรุณากรอกสถานที่นำส่ง" required>
+          <mat-error *ngIf="dataForm.get('Hospital')?.hasError('required')">
+            กรุณากรอกสถานที่นำส่ง
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>ผู้บันทึก</mat-label>
+          <input matInput formControlName="recorder" placeholder="กรุณากรอกชื่อผู้บันทึกข้อมูล" required>
+          <mat-error *ngIf="dataForm.get('recorder')?.hasError('required')">
+            กรุณากรอกชื่อผู้บันทึกข้อมูล
+          </mat-error>
+        </mat-form-field>
+
+        <div class="button-row">
+          <button mat-raised-button color="basic" routerLink="/patient-list" type="button">
+            <mat-icon>arrow_back</mat-icon>
+            กลับ
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="dataForm.invalid">
+            <mat-icon>save</mat-icon>
+            บันทึก
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

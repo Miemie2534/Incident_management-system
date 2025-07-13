@@ -1,0 +1,74 @@
+/* Hero Section */
+.hero-section {
+  height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+              url('/assets/hero-bg.jpg') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  z-index: 2;
+  padding: 2rem;
+}
+
+/* Services Section */
+.service-card {
+  background: white;
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+}
+
+.service-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.service-icon mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.divider {
+  width: 50px;
+  height: 3px;
+  background: #007bff;
+  margin: 1.5rem auto;
+}
+
+/* Emergency Section */
+.emergency-section {
+  background: linear-gradient(45deg, #007bff, #0056b3);
+}
+
+.emergency-number {
+  padding: 3rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section {
+    height: 70vh;
+  }
+
+  .service-card {
+    margin-bottom: 1rem;
+  }
+}

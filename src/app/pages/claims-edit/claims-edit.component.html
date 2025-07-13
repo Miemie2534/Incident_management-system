@@ -1,0 +1,117 @@
+<div class="container mt-5">
+  <mat-card>
+    <mat-card-header class="bg-success text-white p-3">
+      <mat-card-title>
+        <mat-icon class="me-2">report_problem</mat-icon>
+        แบบฟอร์มแก้ไขการแจ้งเคลม
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="p-4">
+      <form [formGroup]="claimForm" (ngSubmit)="updateClaims()">
+        <!-- Fire Extinguisher ID -->
+        <div class="row mb-3">
+          <div class="col-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>รหัสถังดับเพลิง</mat-label>
+              <mat-select formControlName="fireExtinguisherId" placeholder="เลือกถังดับเพลิง">
+          <mat-option *ngFor="let extinguisher of fireExtinguishers" [value]="extinguisher.id">
+            {{ extinguisher.serialNumber }} - {{ extinguisher.location }}
+          </mat-option>
+              </mat-select>
+              <mat-icon matPrefix class="me-2">local_fire_department</mat-icon>
+              <mat-error *ngIf="claimForm.get('fireExtinguisherId')?.hasError('required')">
+          กรุณาเลือกรหัสถังดับเพลิง
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Issue Description -->
+        <div class="row mb-3">
+          <div class="col-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>รายละเอียดปัญหา</mat-label>
+              <textarea matInput
+                        formControlName="claims"
+                        rows="4"
+                        placeholder="อธิบายรายละเอียดปัญหาที่พบ"></textarea>
+              <mat-icon matPrefix class="me-2">description</mat-icon>
+              <mat-error *ngIf="claimForm.get('claims')?.hasError('required')">
+            กรุณาระบุรายละเอียดปัญหา
+          </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Action Taken -->
+        <div class="row mb-3">
+          <div class="col-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>การแก้ไขปัญหา</mat-label>
+              <textarea matInput
+                        formControlName="actionTaken"
+                        rows="4"
+                        placeholder="ระบุวิธีการแก้ไขปัญหา"></textarea>
+              <mat-icon matPrefix class="me-2">build</mat-icon>
+              <mat-error *ngIf="claimForm.get('actionTaken')?.hasError('required')">
+                กรุณาระบุการแก้ไขปัญหา
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+         <!-- Replacement -->
+        <div class="row mb-3">
+          <div class="col-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>ถังสำรอง</mat-label>
+              <textarea matInput
+                        formControlName="replacement"
+                        rows="4"
+                        placeholder="ถังสำรองที่นำไปทดแทน"></textarea>
+                <mat-icon matPrefix class="me-2">local_fire_department</mat-icon>
+              <mat-error *ngIf="claimForm.get('replacement')?.hasError('required')">
+                กรุณาระบุถังสำรองที่นำไปแทนที่
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Claim Date -->
+        <div class="row mb-3">
+          <div class="col-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>วันที่แจ้งเคลม</mat-label>
+              <input matInput
+                     [matDatepicker]="picker"
+                     formControlName="claimDate"
+                     placeholder="เลือกวันที่">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-icon matPrefix class="me-2">date_range</mat-icon>
+              <mat-error *ngIf="claimForm.get('claimDate')?.hasError('required')">
+                กรุณาเลือกวันที่แจ้งเคลม
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-end gap-3 mt-4">
+          <button mat-stroked-button color="warn" type="button" routerLink="/claims-list">
+            <mat-icon class="me-2">arrow_back</mat-icon>
+            ยกเลิก
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!claimForm.valid">
+            <mat-icon class="me-2">save</mat-icon>
+            บันทึก
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+

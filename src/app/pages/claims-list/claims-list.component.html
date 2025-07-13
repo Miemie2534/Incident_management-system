@@ -1,0 +1,111 @@
+<div class="container mat-elevation-z8">
+  <!-- Header with add button -->
+  <mat-toolbar color="bg-success" class="list-header mt-5">
+    <span>📋 รายการเคลมถังดับเพลิง</span>
+    <input
+      type="text"
+      class="form-control mx-3"
+      placeholder="🔍 ค้นหารายการแจ้งเคลม"
+     (keyup)="applyFilter($event)"
+     >
+    <button mat-raised-button color="accent" routerLink="/claims-form">
+      <mat-icon>add</mat-icon>
+      แจ้งเคลม
+    </button>
+  </mat-toolbar>
+  <hr/>
+
+
+
+  <!-- Table -->
+   @if (dataSource.data.length > 0) {
+  <table mat-table [dataSource]="dataSource" class="mat-table custom-table w-100" matSort>
+        <!-- Index Column -->
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+      <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
+    </ng-container>
+
+    <!-- Serial Number Column -->
+    <ng-container matColumnDef="serialNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> หมายเลขถังดับเพลิง </th>
+      <td mat-cell *matCellDef="let element"> {{element.serialNumber}} </td>
+    </ng-container>
+
+    <!-- Type Number Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ประเภทถัง </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+    <!-- Size Number Column -->
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ขนาด </th>
+      <td mat-cell *matCellDef="let element"> {{element.size}} </td>
+    </ng-container>
+
+    <!-- Location Number Column -->
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> สถานที่ติดตั้ง </th>
+      <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+    </ng-container>
+
+    <!-- Issue Description Column -->
+    <ng-container matColumnDef="claims">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> รายละเอียดปัญหา </th>
+      <td mat-cell *matCellDef="let element"> {{element.claims}} </td>
+    </ng-container>
+
+    <!-- Created Date Column -->
+    <ng-container matColumnDef="claimDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> วันที่แจ้ง </th>
+      <td mat-cell *matCellDef="let element"> {{element.claimDate | date:'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <!-- Action Taken Column -->
+    <ng-container matColumnDef="actionTaken">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> การดำเนินการ </th>
+      <td mat-cell *matCellDef="let element"> {{element.actionTaken}} </td>
+    </ng-container>
+
+    <!-- Replacement Column -->
+    <ng-container matColumnDef="replacement">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ถังทดแทน </th>
+      <td mat-cell *matCellDef="let element"> {{element.replacement}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> การจัดการ </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="onEdit(element.id)"
+        matTooltip="แก้ไขข้อมูล">
+          <span class="visually-hidden">ลบ</span>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDelete(element)"
+        matTooltip="ลบข้อมูล">
+          <span class="visually-hidden">ลบ</span>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  } @else {
+    <div class="no-data-message p-4 text-center text-danger">
+      <mat-icon>info</mat-icon>
+      <p>ไม่พบรายการแจ้งเคลม</p>
+    </div>
+  }
+
+
+
+  <!-- Paginator -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>

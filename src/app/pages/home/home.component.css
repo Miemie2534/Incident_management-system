@@ -1,0 +1,113 @@
+:root {
+  --font-heading: 'Prompt', sans-serif;
+  --font-body: 'Sarabun', sans-serif;
+}
+
+body {
+  background-color: #e9f8f1;
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.display-4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.lead {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.card h4 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.card p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+hr {
+  width: 50%;
+  margin: 2rem auto;
+  opacity: 0.1;
+}
+
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.display-6 {
+  font-size: 3rem;
+}
+
+.card-link {
+  display: block;
+  height: 100%;
+}
+
+.page-container {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem 0;
+  }
+
+  .display-4 {
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  .card h4 {
+    font-size: 1.25rem;
+  }
+
+  .card p {
+    font-size: 0.9rem;
+  }
+}

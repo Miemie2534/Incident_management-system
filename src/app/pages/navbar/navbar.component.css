@@ -1,0 +1,119 @@
+:root {
+  --font-heading: 'Prompt', sans-serif;
+  --font-body: 'Sarabun', sans-serif;
+}
+
+.dropdown-item {
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  mat-icon {
+    color: rgba(0, 0, 0, 0.54);
+  }
+}
+
+.navbar-custom {
+      background-color: #d4edda; /* เขียวอ่อน */
+    }
+
+    .navbar {
+  font-family: var(--font-heading);
+  padding: 0;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #155724 !important; /* เขียวเข้ม */
+      font-size: 1.5rem;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      transition: all 0.2s;
+    }
+
+    .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+    .nav-link {
+      color: #155724 !important;
+      font-weight: 500;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #0b2e13 !important;
+      text-decoration: underline;
+    }
+
+    .nav-link:hover {
+  color: #1a472a !important;
+}
+
+    .navbar-toggler {
+      border-color: #155724;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23155724' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(21, 87, 36, 0.7)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+.container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+mat-icon {
+  margin-right: 4px;
+}
+
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+
+  .nav-items {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: inherit;
+    padding: 1rem;
+    z-index: 1000;
+  }
+
+  .nav-items.show {
+    display: flex;
+  }
+
+  .nav-items a {
+    width: 100%;
+    text-align: left;
+  }
+}

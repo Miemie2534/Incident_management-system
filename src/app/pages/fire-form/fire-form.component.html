@@ -1,0 +1,106 @@
+<div class="container mt-5">
+  <mat-card>
+    <mat-card-header class="bg-success text-white">
+      <mat-card-title>
+        <mat-icon>fire_extinguisher</mat-icon>
+        แบบฟอร์มถังดับเพลิง
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="p-4">
+      <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+        <!-- Serial Number & Type -->
+        <div class="row">
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>หมายเลขถัง</mat-label>
+            <input matInput formControlName="SerialNumber" placeholder="เช่น R-001">
+            <mat-icon matPrefix>tag</mat-icon>
+            <mat-error *ngIf="dataForm.get('SerialNumber')?.hasError('required')">
+              กรุณากรอกหมายเลขถัง
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>ประเภทถัง</mat-label>
+            <mat-select formControlName="Type">
+              <mat-option value="" disabled>-- เลือกประเภท --</mat-option>
+              <mat-option value="ถังเคมีแห้ง">ถังเคมีแห้ง</mat-option>
+              <mat-option value="ฮาโรตรอน">ถังฮาโรตรอน</mat-option>
+              <mat-option value="ถัง CO2">ถัง CO2</mat-option>
+              <mat-option value="ถังน้ำ">ถังน้ำ</mat-option>
+              <mat-option value="ถังโฟม">ถังโฟม</mat-option>
+              <mat-option value="Fire ade 2000">Fire ade 2000</mat-option>
+              <mat-option value="Auto Fire ade 2000">Auto Fire ade 2000</mat-option>
+              <mat-option value="Auto ถังเคมีแห้ง">Auto ถังเคมีแห้ง</mat-option>
+            </mat-select>
+            <mat-icon matPrefix>local_fire_department</mat-icon>
+            <mat-error *ngIf="dataForm.get('Type')?.hasError('required')">
+              กรุณาเลือกประเภทถัง
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Size & Location -->
+        <div class="row">
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>ขนาด</mat-label>
+            <input matInput formControlName="Size" placeholder="ระบุขนาดถัง">
+            <mat-icon matPrefix>straighten</mat-icon>
+            <mat-error *ngIf="dataForm.get('Size')?.hasError('required')">
+              กรุณากรอกขนาดถัง
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>สถานที่ติดตั้ง</mat-label>
+            <input matInput formControlName="Location" placeholder="เช่น อาคาร A ชั้น 1">
+            <mat-icon matPrefix>place</mat-icon>
+            <mat-error *ngIf="dataForm.get('Location')?.hasError('required')">
+              กรุณากรอกสถานที่ติดตั้ง
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Date & Status -->
+        <div class="row">
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>วันที่เพิ่มล่าสุด</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="CreatedDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="dataForm.get('CreatedDate')?.hasError('required')">
+              กรุณาเลือกวันที่
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>สถานะ</mat-label>
+            <mat-select formControlName="Status">
+              <mat-option value="" disabled>-- เลือกสถานะ --</mat-option>
+              <mat-option value="พร้อมใช้งาน" class="text-success">✅ พร้อมใช้งาน</mat-option>
+              <mat-option value="กำลังซ่อม" class="text-warning">🔧 กำลังซ่อม</mat-option>
+              <mat-option value="เคลม" class="text-info">📝 เคลม</mat-option>
+              <mat-option value="ชำรุด" class="text-danger">❌ ชำรุด</mat-option>
+            </mat-select>
+            <mat-icon matPrefix>info</mat-icon>
+            <mat-error *ngIf="dataForm.get('Status')?.hasError('required')">
+              กรุณาเลือกสถานะ
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Actions -->
+        <div class="button-row">
+          <button mat-stroked-button color="basic" routerLink="/fire-list">
+            <mat-icon>arrow_back</mat-icon>
+            กลับ
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!dataForm.valid">
+            <mat-icon>save</mat-icon>
+            บันทึก
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

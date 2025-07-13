@@ -1,0 +1,153 @@
+<div class="container mt-5">
+  <mat-card>
+    <mat-card-header class="bg-success text-white p-3">
+      <mat-card-title>
+        <mat-icon class="me-2">report_problem</mat-icon>
+        แบบฟอร์มการแจ้งเหตุ
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="p-4">
+      <form
+        (submit)="editIncident()"
+        class="mat-elevation-z2"
+        style="padding: 24px; max-width: 500px; margin: auto"
+      >
+        <div class="row">
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>ผู้แจ้งเหตุ</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="กรุณากรอกข้อมูลผู้แจ้งเหตุ"
+              [(ngModel)]="incident.report"
+              name="report"
+              required
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>สถานที่เกิดเหตุ</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="กรุณากรอกสถานที่เกิดเหตุ"
+              [(ngModel)]="incident.location"
+              name="location"
+              required
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>รายละเอียด</mat-label>
+            <textarea
+              matInput
+              placeholder="กรุณากรอกรายละเอียด"
+              [(ngModel)]="incident.description"
+              name="description"
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>การแก้ไข</mat-label>
+            <textarea
+              matInput
+              placeholder="กรุณากรอกรายละเอียด"
+              [(ngModel)]="incident.solution"
+              name="solution"
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>เหตุการณ์</mat-label>
+            <mat-select [(ngModel)]="incident.type" name="type" required>
+              <mat-option value="เพลิงไหม้">เพลิงไหม้</mat-option>
+              <mat-option value="หกรั่วไหล">หกรั่วไหล</mat-option>
+              <mat-option value="เจ็บป่วยฉุกเฉิน">เจ็บป่วยฉุกเฉิน</mat-option>
+              <mat-option value="อื่นๆ">อื่นๆ</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-md-6" appearance="outline">
+            <mat-label>ผู้บันทึก</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="กรุณากรอกชื่อผู้บันทึกข้อมูล"
+              [(ngModel)]="incident.recorder"
+              name="recorder"
+              required
+            />
+          </mat-form-field>
+        </div>
+
+        <div
+          class="mb-3 full-width"
+          *ngFor="let fileInput of fileInputs; let i = index"
+        >
+          <label class="form-label">เลือกรูปภาพ {{ i + 1 }}</label>
+          <input
+            class="form-control"
+            type="file"
+            name="images"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+
+        <button class="btn btn-secondary" type="button" (click)="addFileInput()">
+          เพิ่มรูปภาพ
+        </button>
+        <!-- รูปภาพเดิมจาก API -->
+        <div *ngIf="imagePreviewsOld.length > 0" class="mt-3">
+          <label>รูปภาพเดิมที่บันทึกไว้:</label>
+          <div class="d-flex flex-wrap">
+            <div *ngFor="let img of imagePreviewsOld; let i = index" style="margin: 5px">
+              <img [src]="img" width="200" />
+              <button mat-icon-button color="warn" type="button" (click)="removeOldImage(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- รูปภาพใหม่ที่เพิ่งอัปโหลด -->
+        <div *ngIf="imagePreviewsNew.length > 0" class="mt-3">
+          <label>รูปภาพที่เพิ่มใหม่:</label>
+          <div class="d-flex flex-wrap">
+            <div
+              *ngFor="let img of imagePreviewsNew; let i = index"
+              style="margin: 5px"
+            >
+              <img [src]="img" width="200" />
+              <button mat-icon-button color="warn" (click)="removeImage(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button mat-raised-button color="basic" type="button" routerLink="/incident-list">
+            <mat-icon>arrow_back</mat-icon>
+            กลับ
+          </button>
+          <button mat-raised-button color="primary" type="submit">
+            <mat-icon>save</mat-icon>
+            บันทึก
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

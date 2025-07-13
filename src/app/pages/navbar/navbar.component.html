@@ -1,0 +1,59 @@
+<mat-toolbar class="navbar shadow-sm" color="primary">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a mat-button class="brand" routerLink="/">
+      <mat-icon>local_fire_department</mat-icon>
+      <span class="fw-bold">PVO System Mangement Product</span>
+    </a>
+
+    <!-- Mobile Menu Button -->
+    <button mat-icon-button class="d-lg-none" (click)="toggleMenu()">
+      <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
+
+    <!-- Navigation Items -->
+    <div class="nav-items" [class.show]="isMenuOpen">
+      <!-- Show when logged out -->
+      <ng-container *ngIf="!isLoggedIn">
+      <a mat-button routerLink="/login">
+        <mat-icon>login</mat-icon>
+        <span>เข้าสู่ระบบ</span>
+      </a>
+      </ng-container>
+
+      <!-- Show when logged in -->
+      <ng-container *ngIf="isLoggedIn">
+        <a mat-button routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        <span>แดชบอร์ด</span>
+      </a>
+
+        <button mat-button [matMenuTriggerFor]="menu">ทั่วไป</button>
+      <mat-menu #menu="matMenu">
+      <a mat-menu-item routerLink="/fire-list">
+        <mat-icon matPrefix class="me-2">local_fire_department</mat-icon>
+        <span>รายการถังดับเพลิง</span>
+      </a>
+      <a mat-menu-item routerLink="/claims-list">
+        <mat-icon>build</mat-icon>
+        <span>รายการเคลม</span>
+      </a>
+      <a mat-menu-item routerLink="/incident-list">
+        <mat-icon>report</mat-icon>
+        <span>รายการแจ้งเหตุ</span>
+      </a>
+      <a mat-menu-item routerLink="/patient-list">
+        <mat-icon>personal_injury</mat-icon>
+        <span>รายการผู้ป่วย</span>
+      </a>
+      </mat-menu>
+
+
+      <a mat-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>ออกจากระบบ</span>
+      </a>
+      </ng-container>
+    </div>
+    </div>
+</mat-toolbar>

@@ -15,6 +15,7 @@ import { PatientListComponent } from './pages/patient-list/patient-list.componen
 import { ClaimsEditComponent } from './pages/claims-edit/claims-edit.component';
 import { PatientEditComponent } from './pages/patient-edit/patient-edit.component';
 import { IncidentEditComponent } from './pages/incident-edit/incident-edit.component';
+import { IncidentViewComponent } from './pages/incident-view/incident-view.component';
 
 export const routes: Routes = [
   {
@@ -57,6 +58,9 @@ export const routes: Routes = [
   },
   {
     path: 'incident-edit/:id', component: IncidentEditComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'incident-view/:id', component: IncidentViewComponent
   },
   {
     path: 'claims-list', component: ClaimsListComponent

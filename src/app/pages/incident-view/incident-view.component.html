@@ -1,0 +1,37 @@
+<mat-card *ngFor="let data of Incident" class="user-detail-card">
+  <mat-card-header>
+    <mat-card-title>รายละเอียดผู้ใช้งาน</mat-card-title>
+    <mat-card-subtitle>ID: {{ Incident }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+        <strong>ชื่อผู้แจ้ง:</strong> {{ data.report }}
+      </mat-list-item>
+      <mat-list-item>
+        <strong>สถานที่เกิดเหตุ:</strong> {{ data.location }}
+      </mat-list-item>
+      <mat-list-item>
+        <strong>รายละเอียด:</strong> {{ data.description }}
+      </mat-list-item>
+      <mat-list-item>
+        <strong>การแก้ไข:</strong> {{ data.solution }}
+      </mat-list-item>
+      <mat-list-item>
+        <strong>ประเภทเหตุการณ์:</strong> {{ data.type }}
+      </mat-list-item>
+      <mat-list-item>
+        <strong>ผู้บันทึกข้อมูล:</strong> {{ data.recorder }}
+      </mat-list-item>
+      <mat-list-item>
+        <strong>วันที่สร้างบัญชี:</strong> {{ data.reportDate| date:'medium' }}
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary">แก้ไข</button>
+    <button mat-raised-button color="warn">ลบ</button>
+  </mat-card-actions>
+</mat-card>

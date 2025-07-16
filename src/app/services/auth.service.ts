@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
@@ -8,21 +9,37 @@ export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.checkAuthStatus());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
+  authUrl = 'https://localhost:7103/api/Auth/login';
+
+  loginUrl = 'https://localhost:7103/api/Auth';
+
+  http = inject(HttpClient)
+
   checkAuthStatus(): boolean {
-    return !!localStorage.getItem('auth_token');
+    return !!localStorage.getItem('jwtToken');
   }
 
-  login(username: string, password: string): Observable<boolean> {
-    if (username === 'pathumthip199' && password === 'Pvoert199') {
-      localStorage.setItem('auth_token', 'your-jwt-token');
-      this.isLoggedInSubject.next(true);
-      return of(true);
-    }
-    return of(false);
+
+  login(credentials: { username: string, password: string}): Observable<any> {
+    return this.http.post(this.authUrl, credentials);
+  }
+
+
+   setLoginStatus(status: boolean) {
+    this.isLoggedInSubject.next(status);
   }
 
   logout(): void {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem('jwtToken');
     this.isLoggedInSubject.next(false);
+  }
+
+  getAdminOnly(): Observable<any> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.loginUrl}/admin-only`, { headers });
   }
 }

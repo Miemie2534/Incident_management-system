@@ -29,37 +29,67 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
   ngOnInit() {
     // ตรวจสอบถ้าผู้ใช้ล็อกอินอยู่แล้วให้ redirect ไปหน้า content
     if (this.auth.checkAuthStatus()) {
       this.router.navigate(['/content']);
     }
+
+    this.initLogin();
+  }
+
+  initLogin() {
+    this.auth.getAdminOnly().subscribe({
+      next: (data) => {
+        console.log("สำหรับแอดมิน", data);
+      }
+    })
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
+    if(this.loginForm.valid) {
       this.isLoading = true;
       this.errorMessage = '';
       const { username, password } = this.loginForm.value;
 
-      this.auth.login(username, password).subscribe({
-        next: (success) => {
+      this.auth.login({ username, password }).subscribe({
+        next: (res: any) => {
           this.isLoading = false;
-          if (success) {
-            this.toarts.success('เข้าสู่ระบบสำเร็จ', 'สำเร็จ');
+          if(res.token) {
+            localStorage.setItem('jwtToken', res.token);
+            this.auth.setLoginStatus(true)
             this.router.navigate(['/content']);
-          } else {
-            this.errorMessage = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
-            this.toarts.warning(this.errorMessage, 'ข้อผิดพลาด');
+            this.toarts.success('แจ้งเตือน', 'เข้าสู่ระบบสำเร็จ');
           }
-        },
-        error: () => {
-          this.isLoading = false;
-          this.errorMessage = 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ';
-          this.toarts.error(this.errorMessage, 'ข้อผิดพลาด');
         }
-      });
+      })
     }
+
+
+    // if (this.loginForm.valid) {
+    //   this.isLoading = true;
+    //   this.errorMessage = '';
+    //   const { username, password } = this.loginForm.value;
+
+    //   this.auth.login(username, password).subscribe({
+    //     next: (success) => {
+    //       this.isLoading = false;
+    //       if (success) {
+    //         this.toarts.success('เข้าสู่ระบบสำเร็จ', 'สำเร็จ');
+    //         this.router.navigate(['/content']);
+    //       } else {
+    //         this.errorMessage = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
+    //         this.toarts.warning(this.errorMessage, 'ข้อผิดพลาด');
+    //       }
+    //     },
+    //     error: () => {
+    //       this.isLoading = false;
+    //       this.errorMessage = 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ';
+    //       this.toarts.error(this.errorMessage, 'ข้อผิดพลาด');
+    //     }
+    //   });
+    // }
   }
 }
 

@@ -28,51 +28,51 @@ export const routes: Routes = [
     path: 'dialog', component: DialogAnimationsComponent
   },
   {
-    path: 'main', component: MainComponent
+    path: 'main', component: MainComponent, canActivate: [authGuard]
   },
   {
-    path: 'content', component: HomeComponent
+    path: 'content', component: HomeComponent, canActivate: [authGuard]
   },
   {
-    path: 'navbar', component: NavbarComponent
+    path: 'navbar', component: NavbarComponent, canActivate: [authGuard]
   },
   {
-    path: 'fire-list', component: FireExtinguisherListComponent
+    path: 'fire-list', component: FireExtinguisherListComponent, canActivate: [authGuard]
   },
   {
     path: 'fire-form',
     loadComponent: () => import('./pages/fire-form/fire-form.component')
-      .then(m => m.FireFormComponent)
+      .then(m => m.FireFormComponent), canActivate: [authGuard]
   },
   {
-    path: 'claims-form', component: ClaimsFormComponent
+    path: 'claims-form', component: ClaimsFormComponent, canActivate: [authGuard]
   },
   {
     path: 'claims-edit/:id', component: ClaimsEditComponent, canActivate: [authGuard]
   },
   {
-    path: 'incident-form', component: IncidentComponent
+    path: 'incident-form', component: IncidentComponent, canActivate: [authGuard]
   },
   {
-    path: 'incident-list', component: IncidentListComponent
+    path: 'incident-list', component: IncidentListComponent, canActivate: [authGuard]
   },
   {
     path: 'incident-edit/:id', component: IncidentEditComponent, canActivate: [authGuard]
   },
   {
-    path: 'incident-view/:id', component: IncidentViewComponent
+    path: 'incident-view/:id', component: IncidentViewComponent, canActivate: [authGuard]
   },
   {
-    path: 'claims-list', component: ClaimsListComponent
+    path: 'claims-list', component: ClaimsListComponent, canActivate: [authGuard]
   },
   {
-    path: 'patient-form', component: PatientFormComponent
+    path: 'patient-form', component: PatientFormComponent, canActivate: [authGuard]
   },
   {
-    path: 'patient-list', component: PatientListComponent
+    path: 'patient-list', component: PatientListComponent, canActivate: [authGuard]
   },
   {
-    path: 'patient-edit/:id', component: PatientEditComponent
+    path: 'patient-edit/:id', component: PatientEditComponent, canActivate: [authGuard]
   },
   {
     path: 'dashboard',

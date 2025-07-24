@@ -24,6 +24,7 @@ import {MatMenuModule} from '@angular/material/menu';
 export class NavbarComponent implements OnInit {
   isMenuOpen = false;
   isLoggedIn = false;
+  isAdmin = false;
 
   constructor(
     private authService: AuthService,

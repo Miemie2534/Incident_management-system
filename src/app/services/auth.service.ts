@@ -1,4 +1,4 @@
-import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
@@ -9,11 +9,13 @@ export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.checkAuthStatus());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
+
   authUrl = 'https://localhost:7103/api/Auth/login';
 
   loginUrl = 'https://localhost:7103/api/Auth';
 
   http = inject(HttpClient)
+
 
   checkAuthStatus(): boolean {
     return !!localStorage.getItem('jwtToken');

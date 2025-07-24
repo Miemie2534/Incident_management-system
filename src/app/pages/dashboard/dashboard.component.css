@@ -7,28 +7,58 @@
 
 .dashboard-card {
   padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  transition: box-shadow 0.2s;
 }
 
+.dashboard-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
 
 .stat-container {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  gap: 16px;
+  margin-bottom: 12px;
 }
 
 .stat-icon {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 16px;
+  font-size: 2.2rem;
+  background: #f5f5f5;
 }
 
-.stat-icon mat-icon {
-  font-size: 24px;
-  color: white;
+.stat-icon.total {
+  background: #ffe0b2;
+  color: #ff9800;
+}
+
+.stat-icon.active {
+  background: #e0f7fa;
+  color: #009688;
+}
+
+.stat-icon.claims {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+.stat-info .stat-label {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.stat-info .stat-value {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin: 0;
 }
 
 .total {

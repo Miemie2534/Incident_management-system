@@ -1,4 +1,3 @@
-import { IncidentsService } from './../../services/incidents.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -9,7 +8,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ServicesService } from '../../fire-extinguisher/services.service';
 import { ClaimsService } from '../../services/claims.service';
 import { RouterLink } from '@angular/router';
-import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,9 +45,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private fireService: ServicesService,
-    private claimsService: ClaimsService,
-    private IncidentsService: IncidentsService,
-    private patientservice: PatientService
+    private claimsService: ClaimsService
   ) {}
 
   ngOnInit() {
@@ -79,45 +75,6 @@ export class DashboardComponent implements OnInit {
         console.error('ไม่สามารถโหลดข้อมูลการเคลมได้', error);
       }
     });
-
-    this.patientservice.getAllPatient().subscribe({
-      next: (patients) => {
-        this.totalPatient = patients.length;
-      },
-      error: (err) => {
-        console.error('ไม่สามารถโหลดข้อมูลผู้ป่วยได้', err);
-      }
-    })
-
-    this.IncidentsService.getAllIncident().subscribe({
-      next: (incidents) => {
-      this.totalIncident = incidents.length;
-      this.incidentsCount = incidents.length;
-      this.totalIncidentToday = incidents.filter(incident => {
-        const reportDate = new Date(incident.reportDate);
-        const today = new Date();
-        return reportDate.getDate() === today.getDate() &&
-           reportDate.getMonth() === today.getMonth() &&
-           reportDate.getFullYear() === today.getFullYear();
-      }).length;
-      this.totalIncidentThisMonth = incidents.filter(incident => {
-        const reportDate = new Date(incident.reportDate);
-        const today = new Date();
-        return reportDate.getMonth() === today.getMonth() &&
-           reportDate.getFullYear() === today.getFullYear();
-      }).length;
-      this.incident = incidents.filter(incident => incident.type === 'เกิดเหตุ').length;
-
-       // กำหนดเหตุการณ์ล่าสุด 5 รายการ (เรียงจากใหม่ไปเก่า)
-        this.recentIncidents = incidents
-          .filter(i => i.reportDate)
-          .sort((a, b) => new Date(b.reportDate).getTime() - new Date(a.reportDate).getTime())
-          .slice(0, 5);
-      },
-      error: (error) => {
-      console.error('ไม่สามารถโหลดข้อมูลเหตุการณ์ได้', error);
-      }
-    });
   }
 
 
@@ -127,3 +84,4 @@ export class DashboardComponent implements OnInit {
     return (this.activeFireExtinguishers / this.totalFireExtinguishers) * 100;
   }
 }
+

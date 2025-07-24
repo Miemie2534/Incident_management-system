@@ -66,30 +66,6 @@ export class LoginComponent implements OnInit {
       })
     }
 
-
-    // if (this.loginForm.valid) {
-    //   this.isLoading = true;
-    //   this.errorMessage = '';
-    //   const { username, password } = this.loginForm.value;
-
-    //   this.auth.login(username, password).subscribe({
-    //     next: (success) => {
-    //       this.isLoading = false;
-    //       if (success) {
-    //         this.toarts.success('เข้าสู่ระบบสำเร็จ', 'สำเร็จ');
-    //         this.router.navigate(['/content']);
-    //       } else {
-    //         this.errorMessage = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
-    //         this.toarts.warning(this.errorMessage, 'ข้อผิดพลาด');
-    //       }
-    //     },
-    //     error: () => {
-    //       this.isLoading = false;
-    //       this.errorMessage = 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ';
-    //       this.toarts.error(this.errorMessage, 'ข้อผิดพลาด');
-    //     }
-    //   });
-    // }
   }
 }
 

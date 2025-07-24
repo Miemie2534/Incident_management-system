@@ -1,14 +1,14 @@
 <div class="container mt-4">
-  <h1 class="mat-headline-4 mb-4">Dashboard</h1>
+  <h1 class="mat-headline-4 mb-4 text-center">Dashboard</h1>
 
   <!-- Summary Cards -->
-  <div class="grid-container">
+  <div class="dashboard-grid">
     <!-- Total Fire Extinguishers -->
     <mat-card class="dashboard-card">
       <mat-card-content>
         <div class="stat-container">
           <div class="stat-icon total">
-            <mat-icon>fire_extinguisher</mat-icon>
+            <mat-icon fontIcon="fire_extinguisher"></mat-icon>
           </div>
           <div class="stat-info">
             <p class="stat-label">ถังดับเพลิงทั้งหมด</p>
@@ -24,7 +24,7 @@
       <mat-card-content>
         <div class="stat-container">
           <div class="stat-icon active">
-            <mat-icon>check_circle</mat-icon>
+            <mat-icon color="primary">check_circle</mat-icon>
           </div>
           <div class="stat-info">
             <p class="stat-label">พร้อมใช้งาน</p>
@@ -44,7 +44,7 @@
       <mat-card-content>
         <div class="stat-container">
           <div class="stat-icon claims">
-            <mat-icon>report_problem</mat-icon>
+            <mat-icon color="warn">report_problem</mat-icon>
           </div>
           <div class="stat-info">
             <p class="stat-label">การเคลมทั้งหมด</p>
@@ -53,63 +53,10 @@
         </div>
       </mat-card-content>
     </mat-card>
-
-    <!-- Patients -->
-    <mat-card class="dashboard-card">
-      <mat-card-content>
-        <div class="stat-container">
-          <div class="stat-icon claims">
-            <mat-icon>healing</mat-icon>
-          </div>
-          <div class="stat-info">
-            <p class="stat-label">จำนวนผู้ป่วยทั้งหมด</p>
-            <h2 class="stat-value">{{ totalPatient }}</h2>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
   </div>
 
-  <!-- Incident -->
-  <mat-card class="dashboard-card mt-4">
-  <mat-card-content>
-    <h2 class="mat-headline-5 mb-3 d-flex align-items-center">
-      <div class="incident-icon-circle">
-        <mat-icon color="warn">warning</mat-icon>
-      </div>
-      <span class="ms-2">เหตุการณ์ล่าสุด</span>
-    </h2>
-
-    <div class="incident-list">
-      <!-- กรณีไม่มีข้อมูล -->
-      <div *ngIf="recentIncidents?.length === 0" class="incident-empty">
-        <mat-icon color="disabled">info</mat-icon>
-        <span>ไม่มีเหตุการณ์ล่าสุด</span>
-      </div>
-
-      <!-- กรณีมีข้อมูล -->
-      <div *ngFor="let incident of recentIncidents" class="incident-item">
-        <div class="incident-header">
-          <mat-icon class="incident-icon" color="accent">event</mat-icon>
-          <span class="incident-date">{{ incident.reportDate | date: 'short' }}</span>
-        </div>
-        <div class="incident-description">
-          <mat-icon class="incident-icon" color="primary">description</mat-icon>
-          <span>{{ incident.description }}</span>
-        </div>
-      </div>
-
-      <div class="incident-count mt-3">
-        <mat-icon color="warn">confirmation_number</mat-icon>
-        <span>จำนวน: {{ incidentsCount }}</span>
-      </div>
-    </div>
-  </mat-card-content>
-</mat-card>
-
-
   <!-- Quick Actions -->
-  <div class="quick-actions mt-4">
+  <div class="quick-actions mt-4 d-flex justify-content-center gap-3">
     <button mat-raised-button color="primary" routerLink="/fire-form">
       <mat-icon>add</mat-icon>
       เพิ่มถังดับเพลิง

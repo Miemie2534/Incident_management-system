@@ -8,14 +8,7 @@ import { MainComponent } from './pages/main/main.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { DialogAnimationsComponent } from './pages/dialog-animations/dialog-animations.component';
-import { IncidentComponent } from './pages/incident/incident.component';
-import { IncidentListComponent } from './pages/incident-list/incident-list.component';
-import { PatientFormComponent } from './pages/patient-form/patient-form.component';
-import { PatientListComponent } from './pages/patient-list/patient-list.component';
 import { ClaimsEditComponent } from './pages/claims-edit/claims-edit.component';
-import { PatientEditComponent } from './pages/patient-edit/patient-edit.component';
-import { IncidentEditComponent } from './pages/incident-edit/incident-edit.component';
-import { IncidentViewComponent } from './pages/incident-view/incident-view.component';
 
 export const routes: Routes = [
   {
@@ -51,28 +44,7 @@ export const routes: Routes = [
     path: 'claims-edit/:id', component: ClaimsEditComponent, canActivate: [authGuard]
   },
   {
-    path: 'incident-form', component: IncidentComponent, canActivate: [authGuard]
-  },
-  {
-    path: 'incident-list', component: IncidentListComponent, canActivate: [authGuard]
-  },
-  {
-    path: 'incident-edit/:id', component: IncidentEditComponent, canActivate: [authGuard]
-  },
-  {
-    path: 'incident-view/:id', component: IncidentViewComponent, canActivate: [authGuard]
-  },
-  {
     path: 'claims-list', component: ClaimsListComponent, canActivate: [authGuard]
-  },
-  {
-    path: 'patient-form', component: PatientFormComponent, canActivate: [authGuard]
-  },
-  {
-    path: 'patient-list', component: PatientListComponent, canActivate: [authGuard]
-  },
-  {
-    path: 'patient-edit/:id', component: PatientEditComponent, canActivate: [authGuard]
   },
   {
     path: 'dashboard',
